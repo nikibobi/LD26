@@ -5,6 +5,7 @@ public class Wiglue : MonoBehaviour {
 	
 	public float RotationSpeed;
 	public float MoveSpeed;
+	public AudioClip Die;
 	
 	private float currentTime;
 	private float maxTime;
@@ -33,11 +34,11 @@ public class Wiglue : MonoBehaviour {
 	{
 		if(collider.gameObject == player)
 		{
-			player.GetComponent<Character>().Health -= 20;
 			Destroy(gameObject);
 		}
 		else if(collider.gameObject.tag == "Potato")
 		{
+			player.GetComponent<Character>().Score += 10 * (int)Vector3.Distance(transform.position, player.transform.position);
 			Destroy(collider.gameObject);
 			Destroy(gameObject);
 		}

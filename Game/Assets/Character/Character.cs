@@ -6,13 +6,13 @@ public class Character : MonoBehaviour {
 	public float RotationSpeed;
 	public float MoveSpeed;
 	public AudioClip Bite;
+	public AudioClip Eat;
 	public AudioClip Spit;
+	public AudioClip Hurt;
 	
 	private CharacterController controller;
 	private Transform mouth;
 	private int health;
-	
-	public int HP;
 	
 	public GameObject Item{ get; private set; }
 	public int Health
@@ -21,7 +21,7 @@ public class Character : MonoBehaviour {
 		{
 			return health;	
 		}
-		set
+		private set
 		{
 			health = Mathf.Clamp(value, 0, 100);
 		}
@@ -37,7 +37,6 @@ public class Character : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		HP = Health;
 		Move();
 		if(Item != null)
 		{
@@ -48,6 +47,7 @@ public class Character : MonoBehaviour {
 			if(Input.GetKey(KeyCode.Space))
 			{
 				Item.rigidbody.velocity = mouth.up * 80;
+				Item.layer = 0;
 				Item = null;
 				PlaySound(Spit);
 			}
@@ -56,7 +56,7 @@ public class Character : MonoBehaviour {
 			{
 				Health += 10;
 				Destroy(Item);
-				PlaySound(Bite);
+				PlaySound(Eat);
 			}
 		}
 	}
@@ -73,18 +73,25 @@ public class Character : MonoBehaviour {
 	
 	void OnTriggerEnter(Collider collider)
 	{
-		if(Item == null)
+		if(collider.gameObject.tag == "Potato")
 		{
-			if(collider.gameObject.tag == "Potato")
+			if(Item == null)
 			{
 				Item = collider.gameObject;
+				Item.layer = 8;
+				PlaySound(Bite);
 			}
+		}
+		else if(collider.gameObject.tag == "Enemy")
+		{
+			Health -= 20;
+			PlaySound(Hurt);
 		}
 	}
 	
 	private void PlaySound(AudioClip sound)
 	{
-		if(audio.isPlaying == false)
+		//if(audio.isPlaying == false)
 		{
 			audio.clip = sound;
 			audio.Play();
