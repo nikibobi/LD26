@@ -5,6 +5,8 @@ public class Character : MonoBehaviour {
 	
 	public float RotationSpeed;
 	public float MoveSpeed;
+	public AudioClip Bite;
+	public AudioClip Spit;
 	
 	private CharacterController controller;
 	private Transform mouth;
@@ -19,15 +21,15 @@ public class Character : MonoBehaviour {
 		{
 			return health;	
 		}
-		private set
+		set
 		{
 			health = Mathf.Clamp(value, 0, 100);
 		}
 	}
+	public int Score{ get; set; }
 	
 	// Use this for initialization
 	void Start () {
-		//Physics.gravity = new Vector3(0,-50,0);
 		controller = GetComponent<CharacterController>();
 		mouth = transform.FindChild("Mouth");
 		Health = 100;
@@ -47,12 +49,14 @@ public class Character : MonoBehaviour {
 			{
 				Item.rigidbody.velocity = mouth.up * 80;
 				Item = null;
+				PlaySound(Spit);
 			}
 			//eat the item
 			if(Input.GetKey(KeyCode.E))
 			{
 				Health += 10;
 				Destroy(Item);
+				PlaySound(Bite);
 			}
 		}
 	}
@@ -61,18 +65,29 @@ public class Character : MonoBehaviour {
 	{
 		var direction = transform.forward * Input.GetAxis("Vertical");
 		var rotation = Input.GetAxis("Horizontal");
+		
 		transform.RotateAroundLocal(Vector3.up, rotation * RotationSpeed * Time.deltaTime);
 		controller.Move(direction * MoveSpeed * Time.deltaTime);
+		transform.position = new Vector3(transform.position.x, 1, transform.position.z);
 	}
 	
-	void OnTriggerEnter(Collider colider)
+	void OnTriggerEnter(Collider collider)
 	{
 		if(Item == null)
 		{
-			if(colider.gameObject.tag == "Potato")
+			if(collider.gameObject.tag == "Potato")
 			{
-				Item = colider.gameObject;
+				Item = collider.gameObject;
 			}
+		}
+	}
+	
+	private void PlaySound(AudioClip sound)
+	{
+		if(audio.isPlaying == false)
+		{
+			audio.clip = sound;
+			audio.Play();
 		}
 	}
 }
