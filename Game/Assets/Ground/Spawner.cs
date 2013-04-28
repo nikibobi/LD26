@@ -9,7 +9,7 @@ public class Spawner : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-		for (int i = 0; i < Random.Range(10, 30); i++)
+		for (int i = 0; i < Random.Range(10, 50); i++)
 		{
 			var prefab = Rocks[Random.Range(0, 2)];
 			var rotation = Random.rotation;
