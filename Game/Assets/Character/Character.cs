@@ -56,7 +56,7 @@ public class Character : MonoBehaviour {
 			{
 				if(Item.GetComponent<Potato>() != null)
 				{
-					Health += 10;
+					Health += 5;
 					Destroy(Item);
 					PlaySound(Eat);
 				}
@@ -96,7 +96,7 @@ public class Character : MonoBehaviour {
 		}
 		else if(collider.gameObject.tag == "Enemy")
 		{
-			Health -= 20;
+			Health -= 10;
 			PlaySound(Hurt);
 		}
 	}

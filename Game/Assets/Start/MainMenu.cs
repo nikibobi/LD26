@@ -12,7 +12,7 @@ public class MainMenu : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(audio.isPlaying == false || Input.anyKeyDown)
+		if(Input.anyKeyDown)
 		{
 			Application.LoadLevel("Main");	
 		}

@@ -36,7 +36,7 @@ public class Spawner : MonoBehaviour {
 		totalTime += Time.deltaTime;
 		
 		
-		if(wiglueCurTime > 5f)
+		if(wiglueCurTime > 4f)
 		{
 			SpawnWiglue();
 			SpawnPotato();
@@ -46,7 +46,7 @@ public class Spawner : MonoBehaviour {
 		}
 		
 		
-		if(totalTime > 60f * 0.1f && GameObject.FindObjectOfType(typeof(PeeledPotato)) == null)
+		if(totalTime > 60f * 2f && GameObject.FindObjectOfType(typeof(PeeledPotato)) == null)
 		{
 			SpawnPeeledPotato();
 		}
