@@ -1,11 +1,12 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Wiglue\Wiglue.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Ground\Spawner.cs">
     <Files>
-      <File FileName="Assets\Wiglue\Wiglue.cs" Line="38" Column="6" />
-      <File FileName="Assets\Character\Character.cs" Line="75" Column="16" />
+      <File FileName="Assets\Wiglue\Wiglue.cs" Line="35" Column="36" />
+      <File FileName="Assets\Character\Character.cs" Line="58" Column="19" />
       <File FileName="Assets\Potato\Potato.cs" Line="14" Column="3" />
-      <File FileName="Assets\GUI\GUIScript.cs" Line="21" Column="76" />
+      <File FileName="Assets\GUI\GUIScript.cs" Line="31" Column="77" />
+      <File FileName="Assets\Ground\Spawner.cs" Line="27" Column="3" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

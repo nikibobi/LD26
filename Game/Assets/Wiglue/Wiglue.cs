@@ -38,9 +38,16 @@ public class Wiglue : MonoBehaviour {
 		}
 		else if(collider.gameObject.tag == "Potato")
 		{
-			player.GetComponent<Character>().Score += 10 * (int)Vector3.Distance(transform.position, player.transform.position);
-			Destroy(collider.gameObject);
-			Destroy(gameObject);
+			if(collider.GetComponent<Potato>() != null)
+			{
+				player.GetComponent<Character>().Score += 10 * (int)Vector3.Distance(transform.position, player.transform.position);
+				Destroy(collider.gameObject);
+				Destroy(gameObject);
+			}
+			else if(collider.GetComponent<PeeledPotato>() != null)
+			{
+				Application.LoadLevel("Ending1");	
+			}
 		}
 	}
 }

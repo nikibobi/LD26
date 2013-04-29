@@ -54,10 +54,22 @@ public class Character : MonoBehaviour {
 			//eat the item
 			if(Input.GetKey(KeyCode.E))
 			{
-				Health += 10;
-				Destroy(Item);
-				PlaySound(Eat);
+				if(Item.GetComponent<Potato>() != null)
+				{
+					Health += 10;
+					Destroy(Item);
+					PlaySound(Eat);
+				}
+				else if(Item.GetComponent<PeeledPotato>() != null)
+				{
+					Application.LoadLevel("Ending2");
+				}
 			}
+		}
+		
+		if(Health == 0)
+		{
+			Application.LoadLevel("GameOver");
 		}
 	}
 	
@@ -91,10 +103,7 @@ public class Character : MonoBehaviour {
 	
 	private void PlaySound(AudioClip sound)
 	{
-		//if(audio.isPlaying == false)
-		{
-			audio.clip = sound;
-			audio.Play();
-		}
+		audio.clip = sound;
+		audio.Play();
 	}
 }
